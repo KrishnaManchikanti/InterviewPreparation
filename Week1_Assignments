@@ -1,0 +1,280 @@
+Language Basics
+
+Syntax and Semantics
+
+Syntax: Defines the grammatical rules for constructing valid programs in a language. In Java, syntax includes rules like correct use of keywords (if, else, for, etc.), punctuation (;, {}, ()), and naming conventions.
+Semantics: Refers to the meaning behind the valid syntax. It dictates how statements and expressions are interpreted by the compiler and executed at runtime. For instance, assigning values to variables and performing operations like addition or comparison follow semantic rules.
+Primitive Data Types
+
+int: Represents 32-bit signed integers ranging from -2^31 to 2^31 - 1 (int x = 10;).
+float: Represents single-precision 32-bit IEEE 754 floating point numbers (float pi = 3.14f;).
+boolean: Represents a data type with only two possible values: true and false (boolean isJavaFun = true;).
+Variables and Operators
+
+Variables: In Java, variables are containers for storing data values. They are declared using a type (e.g., int, float, boolean) followed by a name and optionally initialized (int x = 5;). Variables must be declared before they can be used.
+Operators: Java supports a wide range of operators:
+Arithmetic Operators: +, -, *, /, %
+Assignment Operators: =, +=, -=, *=, /=, %=
+Comparison Operators: ==, !=, <, >, <=, >=
+Logical Operators: && (AND), || (OR), ! (NOT)
+Bitwise Operators: &, |, ^, ~, <<, >>, >>>
+Control Structures
+
+if-else Statements: Used for decision-making based on conditions. If the condition evaluates to true, the code block following if is executed; otherwise, the code block following else (if present) is executed.
+java
+Copy code
+int x = 10;
+if (x > 5) {
+    System.out.println("x is greater than 5");
+} else {
+    System.out.println("x is not greater than 5");
+}
+Loops:
+for Loop: Executes a block of code a fixed number of times.
+java
+Copy code
+for (int i = 0; i < 5; i++) {
+    System.out.println("Iteration " + i);
+}
+while Loop: Executes a block of code as long as a specified condition is true.
+java
+Copy code
+int i = 0;
+while (i < 5) {
+    System.out.println("Iteration " + i);
+    i++;
+}
+Java's Features
+
+Platform Independence: Java programs can run on any device that has a Java Virtual Machine (JVM).
+Object-Oriented: Java supports encapsulation, inheritance, and polymorphism.
+Robust and Secure: Type-safe, memory management through garbage collection, and security features like sandboxing.
+Rich Standard Library: Provides APIs for networking, I/O, utilities, etc.
+Collections Framework
+
+Collection Interface
+
+Purpose: Represents groups of objects as a single unit. It's the root interface in the Java Collections hierarchy.
+Example:
+java
+Copy code
+Collection<String> names = new ArrayList<>();
+names.add("Alice");
+names.add("Bob");
+List
+
+ArrayList: Implements a dynamic array that can grow as needed (ArrayList<String> list = new ArrayList<>();).
+LinkedList: Implements a doubly linked list where each element is stored in a separate node (LinkedList<Integer> linkedList = new LinkedList<>();).
+Stack: A subclass of Vector that represents a last-in, first-out (LIFO) stack of objects (Stack<String> stack = new Stack<>();).
+Set
+
+HashSet: Implements a set using a hash table. It does not guarantee the order of its elements (HashSet<String> set = new HashSet<>();).
+LinkedHashSet: Maintains the insertion order of elements. It is slower than HashSet but faster than TreeSet(LinkedHashSet<Integer> linkedSet = new LinkedHashSet<>();).
+TreeSet: Implements a set based on a red-black tree. It orders its elements based on their natural ordering (TreeSet<String> treeSet = new TreeSet<>();).
+Queue
+
+PriorityQueue: Implements a priority queue based on a priority heap. Elements are ordered based on their natural ordering or by a comparator provided at queue construction time (PriorityQueue<Integer> queue = new PriorityQueue<>();).
+Deque: A linear collection that supports element insertion and removal at both ends (Deque<String> deque = new LinkedList<>();).
+Map
+
+HashMap: Implements a hash table for storing key-value pairs. It allows null keys and values and is not synchronized (HashMap<String, Integer> map = new HashMap<>();).
+LinkedHashMap: Maintains insertion order. It inherits from HashMap and adds a doubly-linked list to maintain the order of iteration (LinkedHashMap<String, Integer> linkedMap = new LinkedHashMap<>();).
+TreeMap: Implements a map based on a red-black tree. It orders its entries based on the natural ordering of keys or by a comparator provided at map construction time (TreeMap<String, Integer> treeMap = new TreeMap<>();).
+Hashtable: A synchronized implementation of Map. It does not allow null keys or values (Hashtable<String, Integer> hashTable = new Hashtable<>();).
+ConcurrentHashMap: A thread-safe implementation of Map. It is similar to HashMap but provides better concurrency performance (ConcurrentHashMap<String, Integer> concurrentMap = new ConcurrentHashMap<>();).
+Implementations of Core Interfaces
+
+List: ArrayList, LinkedList
+Set: HashSet, LinkedHashSet, TreeSet
+Map: HashMap, LinkedHashMap, TreeMap, Hashtable, ConcurrentHashMap
+Characteristics and Use Cases of Each Implementation
+
+ArrayList: Use when frequent access and traversal are needed, and space efficiency is important.
+LinkedList: Use when frequent insertion and deletion are required, and sequential access is sufficient.
+HashSet: Use for general-purpose set operations when order is not important.
+LinkedHashSet: Use when you need to maintain the insertion order.
+TreeSet: Use when elements need to be stored in sorted order.
+HashMap: Use for general-purpose Map operations where order is not important and null keys/values are allowed.
+LinkedHashMap: Use when you need predictable iteration order.
+TreeMap: Use when you need to maintain elements in sorted order.
+Hashtable: Use when thread safety is required, though consider ConcurrentHashMap for better performance.
+ConcurrentHashMap: Use when you need a high degree of concurrency.
+Utility Classes
+
+Collections: Provides static methods for manipulating collections (e.g., Collections.sort(list) for sorting).
+Arrays: Provides static methods for manipulating arrays (e.g., Arrays.asList(array) to convert an array to a list).
+Comparators and Comparables
+
+Comparable Interface
+
+Purpose: Allows objects to be compared based on a natural order. The compareTo() method is implemented by a class to define the default natural ordering of its instances.
+Example:
+java
+Copy code
+public class Person implements Comparable<Person> {
+    private String name;
+    private int age;
+
+    @Override
+    public int compareTo(Person other) {
+        return Integer.compare(this.age, other.age);
+    }
+}
+Comparator Interface
+
+Purpose: Provides a way to explicitly define custom ordering for objects. It is useful when the natural ordering of a class does not meet your requirements.
+Example:
+java
+Copy code
+Comparator<Person> byName = Comparator.comparing(Person::getName);
+Sorting using Comparable and Comparator
+
+Sorting using Comparable:
+java
+Copy code
+List<Person> people = new ArrayList<>();
+Collections.sort(people); // Uses natural ordering defined by Person's compareTo()
+Sorting using Comparator:
+java
+Copy code
+Collections.sort(people, byName); // Sorts by person's name using the custom comparator
+Immutable Collections
+
+Creating Immutable Collections
+
+Use Collections.unmodifiableXxx() methods to create immutable collections:
+java
+Copy code
+List<String> immutableList = Collections.unmodifiableList(Arrays.asList("apple", "banana"));
+Using Collections.unmodifiableXxx()
+
+When: Use when you need to ensure that a collection cannot be modified after creation to prevent accidental changes or to ensure thread safety.
+Why: Prevents runtime exceptions such as UnsupportedOperationException when attempting to modify the collection.
+Exception Handling
+
+Basic Concepts
+
+Exceptions: Represent abnormal conditions or error situations that occur during the execution of a program.
+Differences from Regular Errors: Exceptions can be handled programmatically, allowing the program to recover from errors and continue execution.
+Types of Exceptions
+
+Checked Exceptions: Must be handled explicitly by the programmer at compile-time (e.g., IOException).
+Unchecked Exceptions: Optionally handled, usually derived from RuntimeException (e.g., NullPointerException).
+Errors: Irrecoverable conditions (e.g., OutOfMemoryError).
+Try-Catch Block
+
+Purpose: Used to handle exceptions that might occur in a block of code.
+Example:
+java
+Copy code
+try {
+    // code that may throw an exception
+    FileReader file = new FileReader("file.txt");
+} catch (FileNotFoundException e) {
+    // handle file not found exception
+    System.out.println("File not found: " + e.getMessage());
+} finally {
+    // optional cleanup code
+    System.out.println("Closing resources.");
+}
+Throwing Exceptions
+
+throw: Used to explicitly throw an exception within a method.
+throws: Used in the method signature to declare that a method may throw certain exceptions and delegates the responsibility of handling exceptions to the caller.
+Custom Exceptions
+
+Purpose: Create custom exception classes to represent specific error conditions in your application.
+Example:
+java
+Copy code
+public class CustomException extends Exception {
+    public CustomException(String message) {
+        super(message);
+    }
+}
+Best Practices
+
+Handle Exceptions Appropriately: Catch specific exceptions rather than broad categories.
+Provide Clear Error Messages: Include sufficient details about the exception to aid in debugging.
+Resource Management: Use try-with-resources for automatic resource management.
+Memory Management & Garbage Collection
+
+Memory Management & Garbage Collection
+
+Stack vs. Heap:
+Stack: Stores primitive values and references to objects in heap memory. Follows LIFO (Last In First Out) order and is limited in size.
+Heap: Stores objects and arrays allocated dynamically. Managed by the JVM's garbage collector.
+Primitive vs. Reference Types
+
+Primitive Types: Store actual values (e.g., int, float, boolean).
+Reference Types: Store references (addresses) to objects stored in heap memory (e.g., classes, arrays).
+Basics of Garbage Collection
+
+Purpose: Automatically reclaims memory occupied by objects that are no longer reachable by any live thread.
+How It Works:
+Mark: Identify which objects are still in use.
+Sweep: Reclaim memory occupied by unreachable objects.
+Compact: Optionally, compact the remaining objects to reduce memory fragmentation.
+GC Algorithms
+
+Mark-and-Sweep:
+Mark: Traverses all reachable objects starting from GC roots (like local variables, static variables, etc.) and marks them as alive.
+Sweep: Reclaims memory from objects not marked as alive.
+GC Phases
+
+Young Generation: Where new objects are allocated. Divided into Eden space and survivor spaces.
+Old Generation (Tenured Generation): Where long-lived objects are stored after surviving multiple garbage collections.
+Tuning and Optimization
+
+Heap Size: Adjust the heap size (-Xms, -Xmx JVM options) based on application requirements.
+Generational GC: Configure GC algorithms (e.g., -XX:+UseG1GC for Garbage First Collector).
+Profiling Tools: Use tools like VisualVM or JConsole to monitor memory usage and GC activity.
+Finalization
+
+Purpose: Finalizers (declared with finalize() method) allow objects to perform cleanup actions before being garbage collected.
+Alternatives: Prefer try-with-resources or explicit resource management (close() method) for cleanup actions over finalizers due to potential issues like resource leaks and performance overhead.
+Generics
+
+Introduction to Generics
+
+Purpose: Allows classes and methods to be parameterized by types.
+Benefits: Enables type safety, eliminates the need for casting, and promotes code reuse.
+Generic Types
+
+Definition: Define a class or interface that can operate on a type parameter.
+Example:
+java
+Copy code
+public class Box<T> {
+    private T value;
+
+    public void setValue(T value) {
+        this.value = value;
+    }
+
+    public T getValue() {
+        return value;
+    }
+}
+Generic Methods
+
+Definition: Methods that introduce their own type parameters.
+Example:
+java
+Copy code
+public <T> void printArray(T[] array) {
+    for (T element : array) {
+        System.out.print(element + " ");
+    }
+    System.out.println();
+}
+Bounded Type Parameters
+
+Purpose: Restrict the types that can be used as type arguments in a generic class or method.
+Example:
+java
+Copy code
+public <T extends Number> void process(T number) {
+    // code
+}
+Use Cases: Ensure that a generic type extends a specific class or implements an interface.
